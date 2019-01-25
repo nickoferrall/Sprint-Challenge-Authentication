@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 class SignUp extends Component {
   state = {
-    username: 'Jay Elect',
-    password: 'Test'
+    username: '',
+    password: ''
   };
 
   handleChange = event => {
@@ -21,7 +21,12 @@ class SignUp extends Component {
       const endpoint = 'http://localhost:3300/api/register';
       const res = await axios.post(endpoint, this.state);
       localStorage.setItem('jwt', res.data.token);
-      console.log('Success!', res);
+
+      const loginEndpoint = 'http://localhost:3300/api/login';
+      const loginRes = await axios.post(loginEndpoint, this.state);
+      localStorage.setItem('jwt', loginRes.data.token);
+      this.props.history.push('/jokes');
+      console.log('End of handlesubmit!', loginRes);
     } catch (error) {
       console.log('Error!', error);
     }
@@ -34,18 +39,18 @@ class SignUp extends Component {
         <h1>Sign-Up Here</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <label>Username</label>
             <input
               name="username"
+              placeholder="Enter username..."
               value={this.state.username}
               onChange={this.handleChange}
               type="text"
             />
           </div>
           <div>
-            <label>Username</label>
             <input
               name="password"
+              placeholder="Enter password..."
               value={this.state.password}
               onChange={this.handleChange}
               type="text"
@@ -57,6 +62,9 @@ class SignUp extends Component {
           <div>Already have an account?</div>
           <NavLink to="/login">
             <button>Login</button>
+          </NavLink>
+          <NavLink to="/jokes">
+            <button>Jokes</button>
           </NavLink>
         </form>
       </div>
