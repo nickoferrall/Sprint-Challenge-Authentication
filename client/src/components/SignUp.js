@@ -63,9 +63,6 @@ class SignUp extends Component {
           <NavLink to="/login">
             <button>Login</button>
           </NavLink>
-          <NavLink to="/jokes">
-            <button>Jokes</button>
-          </NavLink>
         </form>
       </div>
     );

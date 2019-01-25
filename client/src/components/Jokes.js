@@ -16,7 +16,6 @@ class Jokes extends Component {
         }
       };
       const response = await axios.get(endpoint, requestOptions);
-      console.log('Response =', response);
       this.setState({
         jokes: response.data
       });
